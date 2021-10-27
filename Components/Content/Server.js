@@ -1,5 +1,4 @@
-import React, {useEffect} from "react";
-
+import React, { useEffect } from "react";
 import { Container, Flex, Text, Heading, VStack } from "@chakra-ui/react";
 
 export default function ServerComponent(props) {
