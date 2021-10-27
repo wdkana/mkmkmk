@@ -42,12 +42,10 @@ export default function DashboardComponent(props) {
   };
   
   return (
-    <Container maxW="95%">
+    <Container maxW="100%" mt={5}>
       <Flex
         h="95vh"
         w="100%"
-        p={0}
-        m={0}
         direction={{ base: "column", xl: "row" }}
         spacing={10}
         border="1px solid #fff"

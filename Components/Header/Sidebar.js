@@ -24,9 +24,9 @@ export default function Sidebar(props) {
     { id: 3, value: 'tools', title: 'Tools (#)', url: 'tools', icon: FaTools },
     { id: 4, value: 'maps', title: 'Maps (x,y)', url: 'maps', icon: FaMap },
     { id: 5, value: 'class', title: 'Class (@)', url: 'class', icon: FaFileCode },
-    { id: 6, value: 'dummy-1', title: 'Dummy - 1 (@)', url: 'dummy-1', icon: FaFileCode },
-    { id: 7, value: 'dummy-2', title: 'Dummy - 2 (@)', url: 'dummy-2', icon: FaFileCode },
-    { id: 8, value: 'dummy-3', title: 'Dummy - 3 (@)', url: 'dummy-4', icon: FaFileCode },
+    // { id: 6, value: 'dummy-1', title: 'Dummy - 1 (@)', url: 'dummy-1', icon: FaFileCode },
+    // { id: 7, value: 'dummy-2', title: 'Dummy - 2 (@)', url: 'dummy-2', icon: FaFileCode },
+    // { id: 8, value: 'dummy-3', title: 'Dummy - 3 (@)', url: 'dummy-4', icon: FaFileCode },
   ]
 
   const dataSubNav = [
@@ -64,6 +64,7 @@ export default function Sidebar(props) {
 
         <IconButton
           background="none"
+          fontSize={{ base: 14, md: 22 }}
           my={3}
           _hover={{ background: "none" }}
           icon={<FiMenu />}

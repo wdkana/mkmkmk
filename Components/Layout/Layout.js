@@ -19,7 +19,7 @@ export default function Layout(props) {
         onChangeNavSize={props.onChangeNavSize}
         navSize={props.navSize}
       />
-      <Box display={props.navSize == "small" ? "block" : { base: "none", md: "block" }} p={4}>
+      <Box display={props.navSize == "small" ? "block" : { base: "none", md: "block" }} w="100%" maxH="100vh" overflow="auto scroll">
         {props.children}
       </Box>
     </Flex>
