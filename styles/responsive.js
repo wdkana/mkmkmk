@@ -1,3 +1,5 @@
+//responsive function
+
 export const text_responsive = () => {
     const data = { base: "16px", md: "16px" }
     return data
