@@ -24,9 +24,9 @@ export default function Sidebar(props) {
     { id: 3, value: 'tools', title: 'Tools (#)', url: 'tools', icon: FaTools },
     { id: 4, value: 'maps', title: 'Maps (x,y)', url: 'maps', icon: FaMap },
     { id: 5, value: 'class', title: 'Class (@)', url: 'class', icon: FaFileCode },
-    { id: 6, value: 'dummy-1', title: 'Dummy - 1 (@)', url: 'dummy-1', icon: FaFileCode },
-    { id: 7, value: 'dummy-2', title: 'Dummy - 2 (@)', url: 'dummy-2', icon: FaFileCode },
-    { id: 8, value: 'dummy-3', title: 'Dummy - 3 (@)', url: 'dummy-4', icon: FaFileCode },
+    // { id: 6, value: 'dummy-1', title: 'Dummy - 1 (@)', url: 'dummy-1', icon: FaFileCode },
+    // { id: 7, value: 'dummy-2', title: 'Dummy - 2 (@)', url: 'dummy-2', icon: FaFileCode },
+    // { id: 8, value: 'dummy-3', title: 'Dummy - 3 (@)', url: 'dummy-4', icon: FaFileCode },
   ]
 
   const dataSubNav = [
@@ -42,11 +42,12 @@ export default function Sidebar(props) {
     <Flex
       pos="sticky"
       left={2}
+      // h={navSize == "small" ? "97.75vh" : { base: "98.75vh", md: "97.75vh" }}
       h="97.75vh"
       marginTop="1.25vh"
       boxShadow="0 4px 12px 0 rgba(0,0,0,0.5)"
       borderRadius={"8px"}
-      w={navSize == "small" ? "90px" : { base: "90%", md: "auto" }}
+      w={props.navSize == "small" ? "90px" : { base: "90%", md: "auto" }}
       bgColor={props.bgColor}
       flexDir="column"
       justify="space-between"
@@ -54,22 +55,23 @@ export default function Sidebar(props) {
     >
       <Flex
         p="2%"
-        w={navSize == "small" ? "auto" : "auto"}
+        w={props.navSize == "small" ? "auto" : "auto"}
         flexDir="column"
-        alignItems={navSize == "small" ? "center" : "flex-start"}
+        alignItems={props.navSize == "small" ? "center" : "flex-start"}
         as="nav"
         height="100%"
       >
 
         <IconButton
           background="none"
+          fontSize={{ base: 14, md: 22 }}
           my={3}
           _hover={{ background: "none" }}
           icon={<FiMenu />}
           onClick={() => {
-            navSize == "small"
-              ? changeNavSize("large")
-              : changeNavSize("small");
+            props.navSize == "small"
+              ? props.onChangeNavSize("large")
+              : props.onChangeNavSize("small");
           }}
         />
 
@@ -79,7 +81,7 @@ export default function Sidebar(props) {
           {dataNav.map((data, i) =>
             <NavItem
               active={props.url == data.value ? true : false}
-              navSize={navSize}
+              navSize={props.navSize}
               title={data.title}
               icon={data.icon}
               uri={data.url}
@@ -95,7 +97,7 @@ export default function Sidebar(props) {
           {dataSubNav.map((data, i) =>
             <NavItem
               active={props.url == data.value ? true : false}
-              navSize={navSize}
+              navSize={props.navSize}
               title={data.title}
               icon={data.icon}
               uri={data.url}
@@ -111,7 +113,7 @@ export default function Sidebar(props) {
       <Flex
         flexDir="column"
         w="100%"
-        alignItems={navSize == "small" ? "center" : "flex-start"}
+        alignItems={props.navSize == "small" ? "center" : "flex-start"}
         mb={5}
       >
         <Divider />
@@ -120,14 +122,14 @@ export default function Sidebar(props) {
           <Flex
             flexdir="column"
             ml={2}
-            display={navSize == "small" ? "none" : "flex"}
+            display={props.navSize == "small" ? "none" : "flex"}
           >
             <Heading fontSize="0.7em" w="100%" my="auto" colorScheme>
               Hi, Cuy!
             </Heading>
 
             <SwitchItem
-              navSize={navSize}
+              navSize={props.navSize}
               title={
                 props.colorMode === "light" ? "Selamat Pagi 🤗" : "Selamat Malam 😴"
               }
