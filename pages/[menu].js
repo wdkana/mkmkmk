@@ -26,7 +26,7 @@ export default function IndexPage() {
 
   return (
     <Layout bgColor={bgColor} url={uri} toggleColorMode={toggleColorMode} colorMode={useColorMode} txtColor={txtColor}>
-      {/* {showMenu(uri)} */}
+      {showMenu(uri)}
     </Layout>
   );
 }
