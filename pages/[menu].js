@@ -13,19 +13,30 @@ export default function IndexPage() {
   const router = useRouter();
   const { menu } = router.query;
   const [uri, setUri] = useState("");
+  const [navSize, changeNavSize] = useState("small");
 
   const { toggleColorMode } = useColorMode();
   const bgColor = useColorModeValue("gray.50", "whiteAlpha.50");
   const txtColor = useColorModeValue("black.300", "#999FFF");
 
-
-
   useEffect(() => {
-      setUri(menu);
+    setUri(menu);
   }, [menu]);
 
+  const onChangeNavSize = (data) => {
+    changeNavSize(data)
+  }
+
   return (
-    <Layout bgColor={bgColor} url={uri} toggleColorMode={toggleColorMode} colorMode={useColorMode} txtColor={txtColor}>
+    <Layout
+      bgColor={bgColor}
+      url={uri}
+      toggleColorMode={toggleColorMode}
+      colorMode={useColorMode}
+      txtColor={txtColor}
+      onChangeNavSize={onChangeNavSize}
+      navSize={navSize}
+    >
       {showMenu(uri)}
     </Layout>
   );
