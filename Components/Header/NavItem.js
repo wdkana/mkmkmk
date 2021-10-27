@@ -15,13 +15,13 @@ export default function NavItem({
     <Flex
       mt={2}
       flexDir="column"
-      w="101%"
+      w="100%"
       alignItems={navSize == "small" ? "center" : "flex-start"}
     >
       <Menu>
         <Link
-          backgroundColor={active && colorMode != "white" ? "#222" : !bgColor}
-          p={3}
+          // backgroundColor={active && colorMode != "white" ? "#222" : !bgColor}
+          px={3}
           borderRadius={8}
           _hover={{ textDecor: "none", backgroundColor: bgColor }}
           w={navSize == "large" && "100%"}
@@ -30,7 +30,8 @@ export default function NavItem({
           <MenuButton w="100%">
             <Flex>
               <Icon
-                fontSize="sm"
+                fontSize={16}
+                opacity={active ? "100%" : "45%" }
                 color={active ? "#999FFF" : !bgColor}
                 as={icon}
               />
@@ -38,8 +39,9 @@ export default function NavItem({
                 ml={5}
                 display={navSize == "small" ? "none" : "flex"}
                 whiteSpace="nowrap"
+                opacity={active ? "100%" : "45%" }
                 color={active && colorMode !== "dark" ? "#999FFF" : !txtColor}
-                fontSize="0.4em"
+                fontSize={11}
               >
                 {title}
               </Text>

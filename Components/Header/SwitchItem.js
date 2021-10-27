@@ -12,31 +12,45 @@ export default function SwitchItem({
 }) {
   return (
     <Flex
-      mt={1}
       flexDir="column"
-      w="100%"
+      w={ {base: "178px", md: "90px"} }
       alignItems={navSize == "small" ? "center" : "flex-start"}
+      position="relative"
+      textAlign="right"
     >
+      <Badge
+        position="absolute"
+        top="-14px"
+        right="1px"
+        colorScheme="linkedin"
+        fontSize="0.5em"
+      >
+        mode baca
+      </Badge>
       <Flex
         backgroundColor={active && colorMode != "white" ? "#222" : !bgColor}
-        p={3}
+        // p={3}
+        // _hover={{ textDecor: "none", backgroundColor: bgColor }}
         borderRadius={8}
-        _hover={{ textDecor: "none", backgroundColor: bgColor }}
         w={navSize == "large" && "100%"}
       >
-        <Switch size="sm" onChange={toggleColorMode} colorScheme="blue" />
+        <Switch position="absolute" right="1px" size="sm" onChange={toggleColorMode} colorScheme="blue" />
         <Text
+          position="absolute"
+          bottom="-22px"
+          right="1px"
           ml={2}
           display={navSize == "small" ? "none" : "flex"}
           color={active && colorMode !== "dark" ? "#999FFF" : !txtColor}
-          fontSize="0.3em"
+          fontSize="9px"
+          opacity="50%"
+          w="90px"
+          justifyContent="end"
         >
           {title}
         </Text>
       </Flex>
-      <Badge colorScheme="linkedin" fontSize="0.5em">
-        mode baca
-      </Badge>
+
     </Flex>
   );
 }

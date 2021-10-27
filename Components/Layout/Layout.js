@@ -7,10 +7,11 @@ export default function Layout(props) {
   useEffect(() => {
     setUrl(props.url)
   }, [props.url])
+
   return (
-    <Flex bgColor={props.bgColor}>
+    <Flex>
       <Sidebar
-        bgColor={props.bgColor}
+        // bgColor={props.bgColor}
         toggleColorMode={props.toggleColorMode}
         txtColor={props.txtColor}
         colorMode={props.colorMode().colorMode}
