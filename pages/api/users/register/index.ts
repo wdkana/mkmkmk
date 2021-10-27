@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { Anonymous, Member } from '../../../utils/types/users'
-import Users from '../../../utils/classes/users'
+import { Anonymous, Member } from '../../../../utils/types/users'
+import Users from '../../../../utils/classes/users'
+import CryptoJS from "crypto-js"
 
 export default (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method !== "POST") {
@@ -12,10 +13,13 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
     let ip: string = req.body.ip
     let username: string = req.body.username
 
+    let public_key = CryptoJS.AES.encrypt(username, 'secret pub').toString()
+    let private_key = CryptoJS.AES.encrypt(username, 'secret priv').toString()
+
     username !== undefined ? role = 'member' : role = 'anonymous'
 
     const anonymous: Anonymous = new Users(ip, role);
-    const member: Member = new Users(ip, role, username, 'pub - asdjjkasjdhajksd', 'priv - asdasdasd');
+    const member: Member = new Users(ip, role, username, public_key, private_key);
 
     role == "member" ? users.push(member) : users.push(anonymous);
 
