@@ -15,14 +15,15 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         let role: string
         let ip: string = req.body.ip
         let username: string = req.body.username
+        let pin: number = req.body.pin
     
-        let public_key = CryptoJS.AES.encrypt(username, 'secret pub').toString()
-        let private_key = CryptoJS.AES.encrypt(username, 'secret priv').toString()
+        let public_key = CryptoJS.AES.encrypt(username + "-" + pin, 'secret pub').toString()
+        let private_key = CryptoJS.AES.encrypt(username + "-" + pin, 'secret priv').toString()
     
         username !== undefined ? role = 'member' : role = 'anonymous'
     
-        const anonymous: Anonymous = new Users(ip, role);
-        const member: Member = new Users(ip, role, username, public_key, private_key);
+        const anonymous: Anonymous = new Users(ip, role, pin);
+        const member: Member = new Users(ip, role, pin, username, public_key, private_key);
     
         role == "member" ? users.push(member) : users.push(anonymous);
     
