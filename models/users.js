@@ -14,6 +14,18 @@ const users = new Schema({
     uniq: false,
     maxLength: [20, "Username terlalu panjang"],
   },
+  public_key: {
+    type: String,
+    required: false,
+    uniq: false,
+    maxLength: [255, "public key terlalu pajang"],
+  },
+  private_key: {
+    type: String,
+    required: false,
+    uniq: false,
+    maxLength: [255, "private key terlalu pajang"],
+  },
   since: {
     type: Date,
     default: Date.now,
