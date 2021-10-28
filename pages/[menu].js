@@ -24,8 +24,8 @@ export default function IndexPage() {
   }, [menu]);
 
   const onChangeNavSize = (data) => {
-    changeNavSize(data)
-  }
+    changeNavSize(data);
+  };
 
   return (
     <Layout
@@ -44,6 +44,8 @@ export default function IndexPage() {
 
 const showMenu = (url) => {
   switch (url) {
+    case "dashboard":
+      return <Dashboard menu={url} />;
     case "server":
       return <Server menu={url} />;
     case "tools":
@@ -55,6 +57,6 @@ const showMenu = (url) => {
     case "setting":
       return <Setting menu={url} />;
     default:
-      return <Dashboard menu={url} />;
+      break
   }
 };
