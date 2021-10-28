@@ -34,7 +34,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                 "payload": users,
                 "message": "registered successfully"
             });
-        } catch (error) {
+        } catch (error: any) {
             return res.status(500).json({
                 "status": "Error",
                 "message": error.message
