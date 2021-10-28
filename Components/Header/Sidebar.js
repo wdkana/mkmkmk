@@ -5,18 +5,14 @@ import {
   Divider,
   Avatar,
   Heading,
-  Center,
   Box,
-  Switch,
-  Text,
 } from "@chakra-ui/react";
 import { FiMenu, FiHome } from "react-icons/fi";
-import { FaServer, FaTools, FaMap, FaFileCode, FaCode } from "react-icons/fa";
+import { FaServer, FaTools, FaMap, FaFileCode } from "react-icons/fa";
 import NavItem from "./NavItem";
 import SwitchItem from "./SwitchItem";
 
 export default function Sidebar(props) {
-  const [navSize, changeNavSize] = useState("small");
 
   const dataNav = [
     { id: 1, value: 'dashboard', title: 'Dashboard', url: 'dashboard', icon: FiHome },
@@ -24,9 +20,6 @@ export default function Sidebar(props) {
     { id: 3, value: 'tools', title: 'Tools (#)', url: 'tools', icon: FaTools },
     { id: 4, value: 'maps', title: 'Maps (x,y)', url: 'maps', icon: FaMap },
     { id: 5, value: 'class', title: 'Class (@)', url: 'class', icon: FaFileCode },
-    // { id: 6, value: 'dummy-1', title: 'Dummy - 1 (@)', url: 'dummy-1', icon: FaFileCode },
-    // { id: 7, value: 'dummy-2', title: 'Dummy - 2 (@)', url: 'dummy-2', icon: FaFileCode },
-    // { id: 8, value: 'dummy-3', title: 'Dummy - 3 (@)', url: 'dummy-4', icon: FaFileCode },
   ]
 
   const dataSubNav = [
@@ -36,14 +29,12 @@ export default function Sidebar(props) {
     { id: 8, value: 'dummy-3', title: 'Dummy - 3 (@)', url: 'dummy-4', icon: FaFileCode },
   ]
 
-
-
   return (
     <Flex
       pos="sticky"
+      top={6}
       left={2}
-      // h={navSize == "small" ? "97.75vh" : { base: "98.75vh", md: "97.75vh" }}
-      h="97.75vh"
+      h={props.navSize == "small" ? "90.75vh" : { base: "93.75vh", md: "92.75vh" }}
       marginTop="1.25vh"
       boxShadow="0 4px 12px 0 rgba(0,0,0,0.5)"
       borderRadius={"8px"}
