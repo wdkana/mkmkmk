@@ -23,7 +23,7 @@ export default function NavItem({
         <Link
           // backgroundColor={active && colorMode != "white" ? "#222" : !bgColor}
           px={3}
-          py={2}
+          py={1}
           borderRadius={8}
           _hover={{ textDecor: "none", backgroundColor: bgColor }}
           w={navSize == "large" && "100%"}

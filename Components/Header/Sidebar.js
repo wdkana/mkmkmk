@@ -41,9 +41,11 @@ export default function Sidebar(props) {
   return (
     <Flex
       pos="sticky"
+      top={6}
       left={2}
       // h={navSize == "small" ? "97.75vh" : { base: "98.75vh", md: "97.75vh" }}
-      h="97.75vh"
+      // h="97.75vh"
+      h="90.75vh"
       marginTop="1.25vh"
       boxShadow="0 4px 12px 0 rgba(0,0,0,0.5)"
       borderRadius={"8px"}
