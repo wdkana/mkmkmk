@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Flex, Text, MenuButton, Menu, Link, Icon } from "@chakra-ui/react";
+import {text_responsive, icon_responsive } from "../../styles/responsive"
 
 export default function NavItem({
   navSize,
@@ -22,7 +23,7 @@ export default function NavItem({
         <Link
           // backgroundColor={active && colorMode != "white" ? "#222" : !bgColor}
           px={3}
-          py={2}
+          py={1}
           borderRadius={8}
           _hover={{ textDecor: "none", backgroundColor: bgColor }}
           w={navSize == "large" && "100%"}
@@ -31,7 +32,7 @@ export default function NavItem({
           <MenuButton w="100%">
             <Flex>
               <Icon
-                fontSize={{ base: 14, md: 22 }}
+                fontSize={icon_responsive}
                 opacity={active ? "100%" : "45%" }
                 color={active ? "#999FFF" : !bgColor}
                 fontWeight={active ? "bold" : "normal"}
@@ -44,7 +45,7 @@ export default function NavItem({
                 opacity={active ? "100%" : "45%" }
                 fontWeight={active ? "bold" : "normal"}
                 color={active && colorMode !== "dark" ? "#999FFF" : !txtColor}
-                fontSize={{ base: 12, md: 16 }}
+                fontSize={text_responsive}
               >
                 {title}
               </Text>
