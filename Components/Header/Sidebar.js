@@ -10,8 +10,12 @@ import {
 import { FaBars, FaServer, FaTools, FaHome, FaWpexplorer, FaProjectDiagram, FaChartLine, FaBook, FaLink, FaThumbtack } from "react-icons/fa";
 import NavItem from "./NavItem";
 import SwitchItem from "./SwitchItem";
+import { motion, useAnimation } from "framer-motion";
+import { animations } from "../../lib/animations";
 
 export default function Sidebar(props) {
+
+  const MotionFlex = motion(Flex);
 
   const dataNav = [
     { id: 1, value: 'dashboard', title: 'Dashboard', url: 'dashboard', icon: FaHome },
@@ -28,13 +32,18 @@ export default function Sidebar(props) {
     { id: 4, value: 'pengaturan', title: 'Pengaturan', url: 'pengaturan', icon: FaTools },
   ]
 
+  const variants = {
+    visible: { opacity: 1, x: 0 },
+    hidden: { opacity: 0, x: 20 },
+  }
+
   return (
-    <Flex
+    <MotionFlex
       pos="sticky"
       top={6}
       left={2}
       h={props.navSize == "small" ? "90.75vh" : { base: "90.75vh", md: "92.75vh" }}
-      marginTop={{base: "24px", md: 0, lg: 0}}
+      marginTop={{ base: "24px", md: 0, lg: 0 }}
       boxShadow="0 4px 12px 0 rgba(0,0,0,0.5)"
       borderRadius={"8px"}
       w={props.navSize == "small" ? "90px" : { base: "90%", md: "auto" }}
@@ -42,6 +51,14 @@ export default function Sidebar(props) {
       flexDir="column"
       justify="space-between"
       p={15}
+      initial="hidden"
+      animate="visible"
+      variants={variants}
+      transition={{
+        type: "spring",
+        delay: 0.5,
+        duration: 0.5,
+      }}
     >
       <Flex
         p="2%"
@@ -137,6 +154,6 @@ export default function Sidebar(props) {
           </Flex>
         </Flex>
       </Flex>
-    </Flex>
+    </MotionFlex>
   );
 }
