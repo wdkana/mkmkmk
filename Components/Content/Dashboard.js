@@ -1,19 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FiChevronRight, FiBell } from "react-icons/fi";
 import {
   Container,
   Flex,
   Badge,
-  Heading,
-  VStack,
-  HStack,
   Grid,
   GridItem,
   Box,
-  forwardRef,
 } from "@chakra-ui/react";
 import { useColorMode, useColorModeValue } from "@chakra-ui/react";
-import { motion, useAnimation } from "framer-motion";
+import {
+  motion,
+} from "framer-motion";
 import { animations } from "../../lib/animations";
 
 import Clock from "../../lib/clock";
@@ -25,7 +23,7 @@ export default function DashboardComponent(props) {
   const txtColor = useColorModeValue("black.300", "gray.50");
   console.log("props", props);
 
-  const animating = useAnimation();
+  const [firstLoad, setFristLoad] = useState(0);
 
   const MotionFlex = motion(Flex);
 
@@ -42,13 +40,16 @@ export default function DashboardComponent(props) {
         justifyContent="space-between"
         toggleColorMode={toggleColorMode}
         shadow={"md"}
-        initial={animations.destopOffBottom}
+        initial={firstLoad < 1 ? animations.destopOffBottom : false}
         animate={animations.desktopOn}
         transition={{
           type: "spring",
           bounce: 0.5,
           delay: 0.2,
           duration: 1.5,
+        }}
+        onAnimationComplete={() => {
+          setFristLoad(firstLoad + 1);
         }}
       >
         <Box fontWeight={"bold"} fontSize={["lg", "xl", "xl", "3xl"]}>
@@ -72,7 +73,7 @@ export default function DashboardComponent(props) {
   const Grid2 = () => {
     return (
       <MotionFlex
-        initial={animations.destopOffBottom}
+        initial={firstLoad < 1 ? animations.destopOffBottom : false}
         animate={animations.desktopOn}
         transition={{
           type: "spring",
@@ -125,7 +126,7 @@ export default function DashboardComponent(props) {
           alignItems="center"
           w="full"
           h={["100%"]}
-          mt={[4, 4, 4, 6, 6]}
+          mt={[2, 2, 4, 6, 6]}
         >
           <Flex
             justifyContent={"space-around"}
@@ -170,7 +171,7 @@ export default function DashboardComponent(props) {
             w="50%"
             h="full"
             shadow="md"
-            ml={[4, 4, 4, 6, 6]}
+            ml={[2, 2, 4, 6, 6]}
           >
             <Flex
               fontWeight="extrabold"
@@ -211,7 +212,7 @@ export default function DashboardComponent(props) {
         h={["full"]}
         rounded="xl"
         shadow="md"
-        initial={animations.destopOffBottom}
+        initial={firstLoad < 1 ? animations.destopOffBottom : false}
         animate={animations.desktopOn}
         transition={{
           type: "spring",
@@ -314,7 +315,7 @@ export default function DashboardComponent(props) {
         px={[2, 2, 2, 4, 4]}
         bgColor={bgColor}
         rounded="xl"
-        initial={animations.destopOffBottom}
+        initial={firstLoad < 1 ? animations.destopOffBottom : false}
         animate={animations.desktopOn}
         transition={{
           type: "spring",
@@ -334,12 +335,12 @@ export default function DashboardComponent(props) {
             mb={[2, 2, 2, 4, 4]}
             bgColor={bgColorContent}
             rounded="lg"
-            initial={animations.destopOffBottom}
+            initial={firstLoad < 1 ? animations.destopOffBottom : false}
             animate={animations.desktopOn}
             transition={{
               type: "spring",
               bounce: 0.5,
-              delay: .4 + ((i+1) * .1),
+              delay: 0.4 + (i + 1) * 0.1,
               duration: 1.5,
             }}
           >
@@ -360,7 +361,7 @@ export default function DashboardComponent(props) {
         // templateRows="repeat(4, 1fr)"
         templateColumns="repeat(8, 1fr)"
         // border="1px solid #fff"
-        gap={[4, 4, 4, 6, 6]}
+        gap={[2, 2, 4, 6, 6]}
         overflow="hidden"
         gridAutoRows={["auto 100px auto", "auto 120px auto"]}
       >
