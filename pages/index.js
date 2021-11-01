@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import LandingPage from "../Components/LandingPage";
-import { useRouter } from "next/router";
-import Dashboard from "../Components/Content/Dashboard";
-import { useColorMode, useColorModeValue } from "@chakra-ui/react";
+import { Provider } from "react-redux";
+import stores from "../redux/store";
 
 export default function Index() {
   return (
-    <div>
-      <LandingPage />
-    </div>
+    <Provider store={stores}>
+      <div>
+        <LandingPage />
+      </div>
+    </Provider>
   );
 }

@@ -3,20 +3,21 @@ import { Anonymous, Member } from '../../../../utils/types/users'
 import Users from '../../../../utils/classes/users'
 import connectDB from '../../../../utils/db_connect';
 import Users_model from '../../../../models/users';
-import CryptoJS from "crypto-js"
+import CryptoJS from "crypto-js";
+import requestIp from "request-ip";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method !== "POST") {
-        res.status(500).json({ status: 500, message: 'Ilegal Activity' })
+        res.status(200).json({ status: 500, message: 'Ilegal Activity' })
     }else{
 
         let users: Users[] = []
     
         let role: string
-        let ip: string = req.body.ip
+        let ip: any = requestIp.getClientIp(req)
         let username: string = req.body.username
         let pin: number = req.body.pin
-    
+        
         let public_key = CryptoJS.AES.encrypt(username + "-" + pin, 'secret pub').toString()
         let private_key = CryptoJS.AES.encrypt(username + "-" + pin, 'secret priv').toString()
     
@@ -36,7 +37,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                 "message": "registered successfully"
             });
         } catch (error: any) {
-            return res.status(500).json({
+            res.status(200).json({
                 "status": "Error",
                 "message": error.message
             })
