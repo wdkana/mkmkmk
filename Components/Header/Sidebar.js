@@ -10,8 +10,7 @@ import {
 import { FaBars, FaServer, FaTools, FaHome, FaWpexplorer, FaProjectDiagram, FaChartLine, FaBook, FaLink, FaThumbtack } from "react-icons/fa";
 import NavItem from "./NavItem";
 import SwitchItem from "./SwitchItem";
-import { motion, useAnimation } from "framer-motion";
-import { animations } from "../../lib/animations";
+import { motion } from "framer-motion";
 
 export default function Sidebar(props) {
 
@@ -33,8 +32,21 @@ export default function Sidebar(props) {
   ]
 
   const variants = {
-    visible: { opacity: 1, x: 0 },
-    hidden: { opacity: 0, x: 20 },
+    visible: {
+      opacity: 1,
+      width: props.navSize == "small" ? "90px" : "auto",
+      transition: {
+        delayChildren: 0.1,
+        staggerDirection: -1
+      },
+      
+    },
+    hidden: { opacity: 0.1},
+  }
+
+  const item = {
+    hidden: { opacity: 0.1 },
+    visible: { opacity: 1 }
   }
 
   return (
@@ -56,17 +68,19 @@ export default function Sidebar(props) {
       variants={variants}
       transition={{
         type: "spring",
-        delay: 0.5,
+        delay: 0.3,
         duration: 0.5,
       }}
     >
-      <Flex
+      <MotionFlex
         p="2%"
         w={props.navSize == "small" ? "auto" : "auto"}
         flexDir="column"
         alignItems={props.navSize == "small" ? "center" : "flex-start"}
         as="nav"
         height="100%"
+        variants={item}
+        size={10}
       >
 
         <IconButton
@@ -120,13 +134,15 @@ export default function Sidebar(props) {
           )}
         </Box>
 
-      </Flex>
+      </MotionFlex>
 
-      <Flex
+      <MotionFlex
         flexDir="column"
         w="100%"
         alignItems={props.navSize == "small" ? "center" : "flex-start"}
         mb={5}
+        variants={item}
+        size={10}
       >
         <Divider />
         <Flex mt={4} align="center" size="sm" w="100%" justifyContent="center">
@@ -153,7 +169,7 @@ export default function Sidebar(props) {
 
           </Flex>
         </Flex>
-      </Flex>
+      </MotionFlex>
     </MotionFlex>
   );
 }

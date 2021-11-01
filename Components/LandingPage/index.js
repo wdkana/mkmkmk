@@ -21,7 +21,6 @@ import {
   Button,
   Link,
 } from "@chakra-ui/react";
-import { Link as ReachLink } from "@reach/router";
 import { FaArrowRight } from "react-icons/fa";
 import { useColorMode } from "@chakra-ui/react";
 
@@ -46,13 +45,7 @@ export default function LandingPage() {
   }, []);
 
   return (
-    <Box
-      backgroundImage="url('/mkmkmkmk.jpg')"
-      backgroundPosition="center"
-      backgroundRepeat="no-repeat"
-      backgroundSize="cover"
-      h="100vh"
-    >
+    <Box bgGradient="linear(to-r, black, gray.900)" h="100vh">
       <Box position="relative" top={280}>
         <Flex p={5} my="auto">
           <Center w="100%">
@@ -67,7 +60,7 @@ export default function LandingPage() {
                   <Input
                     type="search"
                     placeholder="username"
-                    color={mode == "dark" ? "white" : "gray.300"}
+                    color="white"
                   />
                 </InputGroup>
               </WrapItem>
@@ -78,6 +71,8 @@ export default function LandingPage() {
                   size="lg"
                   isLoading={false}
                   colorScheme="messenger"
+                  bgColor={mode == "dark" ? "blue.900" : "blue.900"}
+                  color={mode == "dark" ? "whiteAlpha.900" : "whiteAlpha.900"}
                   loadingText="Mendaftar"
                   rightIcon={<FaArrowRight />}
                 >
@@ -94,16 +89,17 @@ export default function LandingPage() {
               w={["100%", 525, 490, 610, 610, 690]}
               boxShadow="xl"
               rounded="md"
-              bgColor={ mode == "dark" ? "gray.700" : "whiteAlpha.700"}
+              bgColor={mode == "dark" ? "whiteAlpha.100" : "whiteAlpha.100"}
+              color="whiteAlpha.700"
             >
               <AlertIcon />
               <AlertTitle mr={2}>mejamu mejaku meja kita semua.</AlertTitle>
               <AlertDescription whiteSpace="nowrap" w="100%" align="right">
-                <Link as={ReachLink} to="/explore" ml={1}>
+                <Link href="/login" ml={1}>
                   <u>masuk</u>
                 </Link>
                 <small> atau </small>
-                <Link as={ReachLink} to="/explore" mr={1}>
+                <Link href="/explore" mr={1}>
                   <u>
                     <i>explore</i>
                   </u>
