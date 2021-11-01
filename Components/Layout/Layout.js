@@ -9,7 +9,13 @@ export default function Layout(props) {
   }, [props.url])
 
   return (
-    <Flex pos="relative">
+    <Flex
+      pos="relative" onClick={() => {
+        props.navSize == "large"
+          ? props.onChangeNavSize("small")
+          : null;
+      }}
+    >
       <Sidebar
         bgColor={props.bgColor}
         toggleColorMode={props.toggleColorMode}
@@ -19,7 +25,11 @@ export default function Layout(props) {
         onChangeNavSize={props.onChangeNavSize}
         navSize={props.navSize}
       />
-      <Box display={props.navSize == "small" ? "block" : { base: "none", md: "block" }} w="100%" maxH="100vh" overflow="auto scroll">
+      <Box
+        display={props.navSize == "small" ? "block" : { base: "none", md: "block" }}
+        w="100%"
+        maxH="100vh"
+        overflow="auto scroll">
         {props.children}
       </Box>
     </Flex>

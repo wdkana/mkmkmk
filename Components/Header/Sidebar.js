@@ -33,20 +33,30 @@ export default function Sidebar(props) {
 
   const variants = {
     visible: {
+      x: 0,
       opacity: 1,
-      width: props.navSize == "small" ? "90px" : "auto",
+      width: props.navSize == "small" ? 90 : "auto",
       transition: {
         delayChildren: 0.1,
-        staggerDirection: -1
+        staggerDirection: -1,
+        type: "spring",
       },
       
     },
-    hidden: { opacity: 0.1},
+    hidden: { 
+      x: 20,
+      opacity: 0,
+      transition: {
+        delayChildren: 0.1,
+        staggerDirection: -1,
+        type: "spring",
+      },
+    },
   }
 
   const item = {
-    hidden: { opacity: 0.1 },
-    visible: { opacity: 1 }
+    hidden: { opacity: 0, x: 20 },
+    visible: { opacity: 1, x: 0 }
   }
 
   return (
@@ -66,11 +76,6 @@ export default function Sidebar(props) {
       initial="hidden"
       animate="visible"
       variants={variants}
-      transition={{
-        type: "spring",
-        delay: 0,
-        duration: 0.2,
-      }}
     >
       <MotionFlex
         p="2%"
