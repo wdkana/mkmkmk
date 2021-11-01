@@ -26,6 +26,7 @@ import { motion } from "framer-motion";
 
 export default function Sidebar(props) {
   const MotionFlex = motion(Flex);
+  const [animationToggle, setAnimationToggle] = useState(0)
 
   const dataNav = [
     {
@@ -90,9 +91,13 @@ export default function Sidebar(props) {
   };
 
   const item = {
-    hidden: { opacity: 0, x: -150},
-    visible: { opacity: 1, x: 0},
+    hidden: { opacity: 0, x: -150 },
+    visible: { opacity: 1, x: 0 },
   };
+
+  const onAnimationToggle = (data) => {
+    setAnimationToggle(data)
+  }
 
   return (
     <MotionFlex
@@ -108,9 +113,12 @@ export default function Sidebar(props) {
       flexDir="column"
       justify="space-between"
       p={15}
-      initial="hidden"
+      initial={animationToggle < 1 ? "hidden" : false}
       animate="visible"
       variants={variants}
+      onAnimationComplete={() => {
+        setAnimationToggle(animationToggle + 1);
+      }}
     >
       <MotionFlex
         p="2%"
@@ -131,6 +139,7 @@ export default function Sidebar(props) {
             props.navSize == "small"
               ? props.onChangeNavSize("large")
               : props.onChangeNavSize("small");
+              setAnimationToggle(0)
           }}
         />
 
@@ -202,6 +211,7 @@ export default function Sidebar(props) {
             </Heading>
 
             <SwitchItem
+              onAnimationToggle={onAnimationToggle}
               navSize={props.navSize}
               title={
                 props.colorMode === "light"
