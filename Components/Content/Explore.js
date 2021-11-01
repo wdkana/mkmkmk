@@ -1,26 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { Container, Grid, GridItem, Flex, Box, Badge } from "@chakra-ui/react";
+import { useColorMode, useColorModeValue } from "@chakra-ui/react";
 import {
   motion,
 } from "framer-motion";
 import { animations } from "../../lib/animations";
 
 export default function ExploreComponent(props) {
+  const { toggleColorMode } = useColorMode();
+  const bgColor = useColorModeValue("gray.200", "#5c5f65");
+  const bgColorContent = useColorModeValue("gray.300", "gray.400");
+  const txtColor = useColorModeValue("black.300", "gray.50");
   console.log("props", props);
+
   const [firstLoad, setFristLoad] = useState(0);
+
   const MotionFlex = motion(Flex);
 
   const Grid1 = () => {
     return (
       <MotionFlex
         w="full"
-        h="100%"
         p={[4, 4, 4, 6]}
         alignItems="flex-start"
-        bgColor={props.bgColor}
-        textColor={props.txtColor}
+        bgColor={bgColor}
+        textColor={txtColor}
         rounded={`xl`}
         justifyContent="space-between"
+        toggleColorMode={toggleColorMode}
         shadow={"md"}
         initial={firstLoad < 1 ? animations.destopOffBottom : false}
         animate={animations.desktopOn}
@@ -35,7 +42,7 @@ export default function ExploreComponent(props) {
         }}
       >
         <Box fontWeight={"bold"} fontSize={["lg", "xl", "xl", "3xl"]}>
-          ExploreComponent
+          Meja Kerja
           <Badge
             mb={5}
             ml={2}
@@ -44,13 +51,13 @@ export default function ExploreComponent(props) {
             colorScheme="purple"
           >
             {" "}
-            NEW
+            DEA
           </Badge>
         </Box>
       </MotionFlex>
     );
   };
-
+  
   return (
     <Container maxW="100%" mt={5}>
       <Grid
@@ -66,12 +73,12 @@ export default function ExploreComponent(props) {
         gridAutoRows={["auto 100px auto", "auto 120px auto"]}
       >
         <GridItem
-          colStart={1}
+          colStart={1} 
           colEnd={9}
-        // rowStart={[2, 1]}
-        // colEnd={{ base: 9, lg: 5, md: 5 }}
+          // rowStart={[2, 1]}
+          // colEnd={{ base: 9, lg: 5, md: 5 }}
         >
-          {Grid1()}
+            {Grid1()}
         </GridItem>
 
       </Grid>

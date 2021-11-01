@@ -9,7 +9,14 @@ export default function SwitchItem({
   txtColor,
   colorMode,
   toggleColorMode,
+  onAnimationToggle
 }) {
+
+  const onToggleSwitch = () => {
+    toggleColorMode
+    onAnimationToggle(1)
+  }
+
   return (
     <Flex
       flexDir="column"
@@ -35,7 +42,8 @@ export default function SwitchItem({
         <Switch 
         position="absolute" 
         right="1px" 
-        size="sm" 
+        size="sm"
+        onClick={() => onAnimationToggle(1)} 
         onChange={toggleColorMode} 
         colorScheme="blue" 
         isChecked={colorMode == "dark" ? false : true} />
