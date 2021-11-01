@@ -76,15 +76,22 @@ export default function Sidebar(props) {
       opacity: 1,
       width: props.navSize == "small" ? 90 : "auto",
       transition: {
-        delayChildren: 0.18,
+        when: "beforeChildren",
+        staggerChildren: 0.1,
         type: "easyIn",
+      },
+    },
+    hidden: {
+      opacity: 0,
+      transition: {
+        when: "afterChildren",
       },
     },
   };
 
   const item = {
-    hidden: { opacity: 0, x: -20, ease: "easeOut", duration: 0.5 },
-    visible: { opacity: 1, x: 0, ease: "easeIn", duration: 0.5 },
+    hidden: { opacity: 0, x: -150},
+    visible: { opacity: 1, x: 0},
   };
 
   return (
