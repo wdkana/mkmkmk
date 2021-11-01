@@ -35,7 +35,9 @@ import { Link as ReachLink } from "@reach/router";
 import { FaArrowRight } from "react-icons/fa";
 import { useColorMode } from "@chakra-ui/react";
 import { connect } from "react-redux";
-import { thunk_register_user, thunk_register_user_default } from "../../middleware/user/register/registerMiddleware"
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { FiCopy, FiDownload } from "react-icons/fi";
+import { thunk_register_user, thunk_register_user_default } from "../../middleware/user/register/registerMiddleware";
 
 const LandingPage = (props) => {
   const [mode, setMode] = useState("dark");
@@ -64,6 +66,24 @@ const LandingPage = (props) => {
       pin: pin
     }
     props.onRegister(dataRegis, window.location.origin)
+  }
+
+  const downloadTxtFile = (key,e) => {
+    e.preventDefault();
+    const element = document.createElement("a");
+    if(key == "private"){
+      const file = new Blob(["private : "+ props.userReducer.private_key_register ], {type: 'text/plain'});
+      element.href = URL.createObjectURL(file);
+      element.download = "private.txt";
+      document.body.appendChild(element);
+      element.click();
+    }else{
+      const file = new Blob(["public : "+ props.userReducer.public_key_register ], {type: 'text/plain'});
+      element.href = URL.createObjectURL(file);
+      element.download = "public.txt";
+      document.body.appendChild(element);
+      element.click();
+    }
   }
 
   return (
@@ -145,9 +165,19 @@ const LandingPage = (props) => {
           <ModalCloseButton />
           <ModalBody>
             { props.userReducer.private_key_register !== null
-               ? <UnorderedList>
-               <ListItem>private key: { props.userReducer.private_key_register }</ListItem>
-               <ListItem>public key: { props.userReducer.public_key_register }</ListItem>
+              ? <UnorderedList>
+              <ListItem>private key: { props.userReducer.private_key_register } 
+                <CopyToClipboard text={ props.userReducer.private_key_register }>
+                  <Button size="xs"><FiCopy /></Button>
+                </CopyToClipboard>
+                <Button size="xs" onClick={ (e) => downloadTxtFile("private",e) }><FiDownload /></Button>
+              </ListItem>
+              <ListItem>public key: { props.userReducer.public_key_register }
+                <CopyToClipboard text={ props.userReducer.public_key_register }>
+                  <Button size="xs"><FiCopy /></Button>
+                </CopyToClipboard>
+                <Button size="xs" onClick={ (e) => downloadTxtFile("public",e) }><FiDownload /></Button>
+              </ListItem>
              </UnorderedList> : props.userReducer.isError ? "Maaf IP atau username kamu sudah terdaftar" : username.length > 3 ? 
               <HStack>
                 <PinInput mask otp onChange={ (e) => setPin(e) }>
