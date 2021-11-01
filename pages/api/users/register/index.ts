@@ -14,7 +14,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         let users: Users[] = []
     
         let role: string
-        let ip: string = requestIp.getClientIp(req)
+        let ip: any = requestIp.getClientIp(req)
         let username: string = req.body.username
         let pin: number = req.body.pin
         
