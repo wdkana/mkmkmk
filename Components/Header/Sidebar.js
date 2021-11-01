@@ -54,7 +54,7 @@ export default function Sidebar(props) {
       pos="sticky"
       top={6}
       left={2}
-      h={props.navSize == "small" ? "90.75vh" : { base: "90.75vh", md: "92.75vh" }}
+      h={{ base: "88.75vh", md: "92.75vh", lg: "92.75vh" }}
       marginTop={{ base: "24px", md: 0, lg: 0 }}
       boxShadow="0 4px 12px 0 rgba(0,0,0,0.5)"
       borderRadius={"8px"}
