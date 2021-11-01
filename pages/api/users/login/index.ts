@@ -7,7 +7,7 @@ import CryptoJS from "crypto-js"
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method !== "POST") {
-        res.status(500).json({ status: 500, message: 'Ilegal Activity' })
+        res.status(200).json({ status: 500, message: 'Ilegal Activity' })
     }else{
 
         let users: Users[] = []
@@ -35,7 +35,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                 }
             });
         } catch (error: any) {
-            return res.status(500).json({
+            res.status(200).json({
                 "status": "Error",
                 "message": error.message
             })
