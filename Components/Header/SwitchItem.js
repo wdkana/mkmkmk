@@ -29,12 +29,16 @@ export default function SwitchItem({
       </Badge>
       <Flex
         backgroundColor={active && colorMode != "white" ? "#222" : !bgColor}
-        // p={3}
-        // _hover={{ textDecor: "none", backgroundColor: bgColor }}
         borderRadius={8}
         w={navSize == "large" && "100%"}
       >
-        <Switch position="absolute" right="1px" size="sm" onChange={toggleColorMode} colorScheme="blue" />
+        <Switch 
+        position="absolute" 
+        right="1px" 
+        size="sm" 
+        onChange={toggleColorMode} 
+        colorScheme="blue" 
+        isChecked={colorMode == "dark" ? false : true} />
         <Text
           position="absolute"
           bottom="-22px"
