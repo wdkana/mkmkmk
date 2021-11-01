@@ -68,8 +68,8 @@ export default function Sidebar(props) {
       variants={variants}
       transition={{
         type: "spring",
-        delay: 0.1,
-        duration: 0.5,
+        delay: 0,
+        duration: 0.2,
       }}
     >
       <MotionFlex
