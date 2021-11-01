@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Layout from "../Components/Layout/Layout";
 import { useRouter } from "next/router";
 import Dashboard from "../Components/Content/Dashboard";
-import Server from "../Components/Content/Server";
+import Explore from "../Components/Content/Explore";
 import Tools from "../Components/Content/Tools";
 import Maps from "../Components/Content/Maps";
 import Class from "../Components/Content/Class";
@@ -46,16 +46,23 @@ const showMenu = (url) => {
   switch (url) {
     case "dashboard":
       return <Dashboard menu={url} />;
-    case "server":
-      return <Server menu={url} />;
-    case "tools":
+    case "explore":
+      return <Explore menu={url} />;
+    case "project":
       return <Tools menu={url} />;
-    case "maps":
+    case "peyimpanan":
       return <Maps menu={url} />;
-    case "class":
+    case "karir":
       return <Class menu={url} />;
-    case "setting":
+    case "library":
       return <Setting menu={url} />;
+    case "link":
+      return <Setting menu={url} />;
+    case "pinned":
+      return <Setting menu={url} />;
+    case "pengaturan":
+      return <Setting menu={url} />;
+
     default:
       break
   }

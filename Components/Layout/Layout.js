@@ -9,13 +9,7 @@ export default function Layout(props) {
   }, [props.url])
 
   return (
-    <Flex
-      pos="relative" onClick={() => {
-        props.navSize == "large"
-          ? props.onChangeNavSize("small")
-          : null;
-      }}
-    >
+    <Flex>
       <Sidebar
         bgColor={props.bgColor}
         toggleColorMode={props.toggleColorMode}
