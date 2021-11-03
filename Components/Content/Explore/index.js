@@ -12,7 +12,10 @@ import {
 } from "framer-motion";
 import { animations } from "../../../lib/animations";
 import SideGrid from "./SideGrid";
-import SearchGrid from "./SearchGrid"
+import SearchGrid from "./SearchGrid";
+import TopTagsGrid from "./TopTagsGrid";
+import NewTagsGrid from "./NewTagsGrid";
+import NewToThisGrid from "./NewToThisGrid";
 
 export default function ExploreComponent(props) {
   const { toggleColorMode } = useColorMode();
@@ -30,7 +33,7 @@ export default function ExploreComponent(props) {
     return (
       <MotionFlex
         w="full"
-        h="100%"
+        h="20vh"
         p={[4, 4, 4, 6]}
         alignItems="flex-start"
         bgColor={bgColor}
@@ -59,32 +62,38 @@ export default function ExploreComponent(props) {
   };
 
   const onChangeOpenTags = (data) => {
-    console.log(data)
     setActiveTag(data)
   }
 
 
   return (
-    <Container
-      maxW="100%"
-      mt={5}
-      pos="relative"
-      minH="95vh"
-      w="100%"
-      bgCp
-    >
-
-      <Box w="100%">
-        <SearchGrid bgColor={bgColor} txtColor={txtColor} bgColorContent={bgColorContent} />
+    <Container maxW="100%" mt={5}>
+      <Grid
+        w="100%"
+        p={0}
+        m={0}
+        mb={4}
+        templateColumns="repeat(8, 1fr)"
+        templateRows="repeat(4, auto)"
+        gap={[2, 2, 4, 6, 6]}
+        overflow="hidden"
+      >
+        <GridItem colStart={[1]} colEnd={9}>
+          <SearchGrid bgColor={bgColor} txtColor={txtColor} bgColorContent={bgColorContent} />
+        </GridItem>
+        <GridItem colStart={[1]} colEnd={9} pos="relative" h="340px">
+          <TopTagsGrid bgColor={bgColor} txtColor={txtColor} bgColorContent={bgColorContent} />
+        </GridItem>
+        <GridItem colStart={[1]} colEnd={9}>
+          <NewToThisGrid bgColor={bgColor} txtColor={txtColor} bgColorContent={bgColorContent}/>
+        </GridItem>
+        <GridItem colStart={[1]} colEnd={9} pos="relative" h="340px">
+          <NewTagsGrid bgColor={bgColor} txtColor={txtColor} bgColorContent={bgColorContent} />
+        </GridItem>
+      </Grid>
+      <Box>
+        <SideGrid bgColor={bgColor} txtColor={txtColor} activeTag={activeTag} onChangeOpenTags={onChangeOpenTags} />
       </Box>
-      <Box w="100%" mt={2}>
-        {DummGrid()}
-      </Box>
-      <Box w="100%" mt={2}>
-        {DummGrid()}
-      </Box>
-
-      <SideGrid bgColor={bgColor} txtColor={txtColor} activeTag={activeTag} onChangeOpenTags={onChangeOpenTags} />
     </Container>
   );
 }

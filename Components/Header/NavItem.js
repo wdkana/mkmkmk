@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Flex, Text, MenuButton, Menu, Link, Icon } from "@chakra-ui/react";
-import {text_responsive, icon_responsive } from "../../styles/responsive"
+import {text_responsive, icon_responsive } from "../../shared/styled/responsive"
 
 export default function NavItem({
   navSize,
