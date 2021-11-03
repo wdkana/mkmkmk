@@ -33,7 +33,7 @@ export default function Sidebar(props) {
       id: 1,
       value: "dashboard",
       title: "Dashboard",
-      url: "dashboard",
+      url: "/",
       icon: FaHome,
     },
     {
@@ -200,7 +200,7 @@ export default function Sidebar(props) {
       >
         <Divider />
         <Flex mt={4} align="center" size="sm" w="100%" justifyContent="center">
-          <Avatar size="sm" src="coding.jpg" />
+          <Avatar size="sm" src="/coding.jpg" />
           <Flex
             flexdir="column"
             ml={2}
