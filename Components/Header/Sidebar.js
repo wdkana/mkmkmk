@@ -119,6 +119,7 @@ export default function Sidebar(props) {
       onAnimationComplete={() => {
         setAnimationToggle(animationToggle + 1);
       }}
+      zIndex={2}
     >
       <MotionFlex
         p="2%"
