@@ -11,7 +11,6 @@ import {
   motion,
 } from "framer-motion";
 import { animations } from "../../../lib/animations";
-import { FaHashtag } from "react-icons/fa";
 import SideGrid from "./SideGrid";
 import SearchGrid from "./SearchGrid"
 
@@ -66,33 +65,26 @@ export default function ExploreComponent(props) {
 
 
   return (
-    <Container maxW="100%" mt={5}>
-      <Grid
-        pos="relative"
-        minH="95vh"
-        w="100%"
-        p={0}
-        m={0}
-        templateRows="repeat(8, 1fr)"
-        templateColumns="repeat(8, 1fr)"
-        gap={[2, 2, 4, 6, 6]}
-        overflow="hidden"
-        gridAutoRows={["auto 100px auto", "auto 120px auto"]}
-      >
-        <GridItem colStart={1} colEnd={activeTag ? 8 : 9}>
-          <SearchGrid bgColor={bgColor} txtColor={txtColor} bgColorContent={bgColorContent} />
-        </GridItem>
-        <GridItem colStart={1} colEnd={activeTag ? 8 : 9}>
-          {DummGrid()}
-        </GridItem>
-        <GridItem colStart={1} colEnd={activeTag ? 8 : 9}>
-          {DummGrid()}
-        </GridItem>
-        <GridItem colStart={1} colEnd={activeTag ? 8 : 9}>
-          {DummGrid()}
-        </GridItem>
-        <SideGrid bgColor={bgColor} txtColor={txtColor} activeTag={activeTag} onChangeOpenTags={onChangeOpenTags} />
-      </Grid>
+    <Container
+      maxW="100%"
+      mt={5}
+      pos="relative"
+      minH="95vh"
+      w="100%"
+      bgCp
+    >
+
+      <Box w="100%">
+        <SearchGrid bgColor={bgColor} txtColor={txtColor} bgColorContent={bgColorContent} />
+      </Box>
+      <Box w="100%" mt={2}>
+        {DummGrid()}
+      </Box>
+      <Box w="100%" mt={2}>
+        {DummGrid()}
+      </Box>
+
+      <SideGrid bgColor={bgColor} txtColor={txtColor} activeTag={activeTag} onChangeOpenTags={onChangeOpenTags} />
     </Container>
   );
 }

@@ -28,7 +28,7 @@ export default function SearchGridComponent(props) {
             h="100%"
             p={[4, 4, 4, 6]}
             alignItems="flex-start"
-            bgColor={props.bgColor}
+            // bgColor={props.bgColor}
             textColor={props.txtColor}
             rounded={`xl`}
             justifyContent="space-between"
@@ -46,19 +46,19 @@ export default function SearchGridComponent(props) {
                 setFristLoad(firstLoad + 1);
             }}
         >
-            <Box my="auto" w="100%" fontWeight={"bold"} fontSize={["lg", "xl", "xl", "3xl"]}>
+            <Box borderRadius="18px" bgColor={props.bgColor} m="auto" w="70%" fontWeight={"bold"} fontSize={["lg", "xl", "xl", "3xl"]}>
             <InputGroup>
             <Input
               focusBorderColor={props.bgColorContent}
               borderColor={props.bgColorContent}
               border="solid 2px"
-              size="lg"
+              size="md"
               variant="outline"
               placeholder="Search Aplikasi ...."
               borderRadius="18px"
               colorScheme="red"
             />
-            <InputRightElement children={<FaSearch size={18} color="green.500" />} />
+            <InputRightElement children={<FaSearch size={14} color="green.500" />} />
           </InputGroup>
             </Box>
         </MotionFlex>
