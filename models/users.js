@@ -2,12 +2,6 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const users = new Schema({
-  ip: {
-    type: String,
-    required: [true, "Tolong tambahkan alamat IP user"],
-    unique: true,
-    maxLength: [20, "Alamat IP tidak valid"],
-  },
   username: {
     type: String,
     required: false,

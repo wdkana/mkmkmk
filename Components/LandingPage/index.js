@@ -36,6 +36,7 @@ import { FiCopy, FiDownload } from "react-icons/fi";
 import { thunk_register_user, thunk_register_user_default } from "../../middleware/user/register/registerMiddleware";
 
 const LandingPage = (props) => {
+  
   const [mode, setMode] = useState("dark");
   const [username, setUsername] = useState('')
   const [pin, setPin] = useState(0)
@@ -157,7 +158,7 @@ const LandingPage = (props) => {
               </Center>
             </Flex>
           </Box>
-          <Modal isOpen={isOpen} onClose={closeModal} size="lg">
+          <Modal isOpen={isOpen} onClose={closeModal} size="lg" isCentered>
             <ModalOverlay />
             <ModalContent>
               <ModalHeader>{ props.userReducer.isError ? "Register Gagal" : props.userReducer.private_key_register !== null ? "Simpan key anda" : username.length > 3 ? "Pin" : "Warning" }</ModalHeader>

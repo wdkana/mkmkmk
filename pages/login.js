@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Login from "../Components/LandingPage/login";
+import { Provider } from "react-redux";
+import stores from "../redux/store";
 
 export default function LoginPage() {
   return (
-    <div>
-      <Login />
-    </div>
+    <Provider store={stores}>
+      <div>
+        <Login />
+      </div>
+    </Provider>
   );
 }
