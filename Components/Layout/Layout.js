@@ -11,7 +11,7 @@ export default function Layout(props) {
   const [navSize, changeNavSize] = useState("small");
 
   const { toggleColorMode } = useColorMode();
-  const bgColor = useColorModeValue("gray.50", "whiteAlpha.50");
+  const bgColor = useColorModeValue("gray.200", "#5c5f65");
   const txtColor = useColorModeValue("black.300", "#999FFF");
 
   useEffect(() => {
@@ -24,23 +24,24 @@ export default function Layout(props) {
   };
 
   return (
-    <Flex>
+    <Flex pos="relative">
       <Sidebar
         bgColor={bgColor}
         toggleColorMode={toggleColorMode}
         txtColor={txtColor}
-        colorMode={useColorMode}
+        colorMode={useColorMode().colorMode}
         url={uri}
         onChangeNavSize={onChangeNavSize}
         navSize={navSize}
       />
       <Box
-        display={
-          props.navSize == "small" ? "block" : { base: "none", md: "block" }
-        }
+        pos={[navSize == "small" ? "relative" : "absolute", "relative"]}
         w="100%"
         maxH="100vh"
         overflow="auto scroll"
+        zIndex={1}
+        bgColor={!bgColor}
+        opacity={[navSize == "small" ? 1 : .3, 1]}
       >
         {props.children}
       </Box>

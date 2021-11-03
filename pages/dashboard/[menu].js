@@ -12,7 +12,6 @@ export default function MenuPage() {
   const { menu } = router.query;
   const [uri, setUri] = useState("");
   useEffect(() => {
-    console.log("menu", menu)
     setUri(menu);
   }, [menu]);
   return (
