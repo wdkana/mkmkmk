@@ -4,7 +4,6 @@ import Users from '../../../../utils/classes/users'
 import connectDB from '../../../../utils/db_connect';
 import Users_model from '../../../../models/users';
 import CryptoJS from "crypto-js";
-import requestIp from "request-ip";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method !== "POST") {
@@ -14,7 +13,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         let users: Users[] = []
     
         let role: string
-        let ip: any = requestIp.getClientIp(req)
         let username: string = req.body.username
         let pin: number = req.body.pin
         
@@ -23,8 +21,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     
         username !== undefined ? role = 'member' : role = 'anonymous'
     
-        const anonymous: Anonymous = new Users(ip, role, pin);
-        const member: Member = new Users(ip, role, pin, username, public_key, private_key);
+        const anonymous: Anonymous = new Users(role, pin);
+        const member: Member = new Users(role, pin, username, public_key, private_key);
     
         role == "member" ? users.push(member) : users.push(anonymous);
     

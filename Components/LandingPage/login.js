@@ -9,6 +9,7 @@ import {
   ModalContent,
   ModalHeader,
   ModalBody,
+  ModalFooter,
   ModalCloseButton,
   useDisclosure,
   HStack,
@@ -18,39 +19,47 @@ import {
   PinInputField,
 } from "@chakra-ui/react";
 import { useColorMode } from "@chakra-ui/react";
+import { connect } from "react-redux";
+import Cookies from 'universal-cookie';
+import { thunk_login_user, thunk_login_default } from "../../middleware/user/login/loginMiddleware"
 
-const new_pin = () => {
-  return (
-    <HStack>
-      <Flex w="50%" mx="auto" mt={2}>
-        <PinInput
-          type="number"
-          size="lg"
-          focusBorderColor="blue.400"
-          variant="flushed"
-          isRequired
-          mask
-          autoFocus
-        >
-          <PinInputField />
-          <PinInputField />
-          <PinInputField />
-          <PinInputField />
-          <PinInputField />
-          <PinInputField />
-        </PinInput>
-      </Flex>
-    </HStack>
-  );
-};
+const Login = (props) => {
 
-export default function Login() {
   const [mode, setMode] = useState("dark");
+  const [privateKey, setPrivateKey] = useState('');
   const { isOpen, onOpen, onClose } = useDisclosure();
   const nowMode = useColorMode().colorMode;
+
   useEffect(() => {
     setMode(nowMode);
-  }, []);
+    if(props.loginReducer.user !== null){
+      if(props.loginReducer.user.private_key === privateKey){
+        const cookies = new Cookies()
+        cookies.set('private_key', props.loginReducer.user.private_key, { path: '/' })
+        window.location.href = "/dashboard"
+      } 
+    }
+  }, [props.loginReducer.user]);
+
+  const privateUser = (data) => {
+    setPrivateKey(data)
+  }
+
+  const LoginUser = (e) => {
+    if( e.length === 6){
+      const dataLogin = {
+        private_key: privateKey,
+        pin: parseInt(e)
+      }
+      props.onLogin(dataLogin, window.location.origin)
+    }else{
+      return false
+    }
+  }
+
+  const defaultLogin = () => {
+    props.onDefault()
+  }
 
   const enter_pin = () => {
     return (
@@ -72,13 +81,41 @@ export default function Login() {
           isOpen={isOpen}
           onClose={onClose}
           motionPreset="slideInBottom"
-          size="full"
+          isCentered
         >
           <ModalOverlay />
           <ModalContent w={["xl", "lg"]} mx="auto">
             <ModalHeader>Masukan PIN</ModalHeader>
             <ModalCloseButton />
-            <ModalBody>{new_pin()}</ModalBody>
+            <ModalBody>
+              { props.loginReducer.isError ? props.loginReducer.messageError : 
+                <HStack>
+                  <Flex w="50%" mx="auto" mt={2}>
+                    <PinInput
+                      type="number"
+                      size="lg"
+                      focusBorderColor="blue.400"
+                      variant="flushed"
+                      isRequired
+                      mask
+                      autoFocus
+                      onChange={ (e) => LoginUser(e) }
+                    >
+                      <PinInputField />
+                      <PinInputField />
+                      <PinInputField />
+                      <PinInputField />
+                      <PinInputField />
+                      <PinInputField />
+                    </PinInput>
+                  </Flex>
+                </HStack>
+              }
+            </ModalBody>
+            <ModalFooter>
+            { props.loginReducer.isError ? 
+                <Button onClick={ defaultLogin }>Masukan kembali pin</Button> : false }
+            </ModalFooter>
           </ModalContent>
         </Modal>
       </Flex>
@@ -90,13 +127,13 @@ export default function Login() {
       <Box position="relative" top={280}>
         <Flex p={5} w="100%">
           <Textarea
-            isFullWidth={true}
             width="100%"
             placeholder="---tempel atau masukan PRIVATE KEY disini---"
             size="lg"
             variant="flushed"
             color={mode == "dark" ? "black.500" : "gray.400"}
             resize="horizontal"
+            onChange={ (e) => privateUser(e.target.value) }
           />
         </Flex>
         <Flex p={5} w="100%">
@@ -114,3 +151,18 @@ export default function Login() {
     </Box>
   );
 }
+
+const mapStateToProps = state => {
+  return {
+    loginReducer: state.LoginReducer
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onLogin: (data, url) => { dispatch(thunk_login_user(data, url)) },
+    onDefault: () => { dispatch(thunk_login_default()) }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
