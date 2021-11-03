@@ -27,7 +27,7 @@ export default function NavItem({
           borderRadius={8}
           _hover={{ textDecor: "none", backgroundColor: bgColor }}
           w={navSize == "large" && "100%"}
-          href={uri == "setting" ? "" : "/" + uri}
+          href={uri == "setting" ? "" : "/dashboard/" + uri}
         >
           <MenuButton w="100%">
             <Flex>
