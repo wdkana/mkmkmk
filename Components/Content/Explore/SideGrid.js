@@ -4,7 +4,8 @@ import {
     Box,
     Divider,
     Center,
-    Heading
+    Heading,
+    Badge
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { animations } from "../../../lib/animations";
@@ -13,12 +14,48 @@ import { text_responsive } from "../../../shared/styled/responsive";
 import { dummyTags, dummyVirals } from "../../../shared/json/side-grid.explore";
 
 export default function SideGridComponent(props) {
+    const [animationToggle, setAnimationToggle] = useState(0)
     const MotionBox = motion(Box);
+
+    const randomColor = () => {
+        const colorBadge = ["green", "purple", "red", "blue", "yellow"]
+        return colorBadge[Math.floor(Math.random() * colorBadge.length)]
+    }
+
+    const onActToggleTag = () => {
+        props.onChangeOpenTags(!props.activeTag)
+        setAnimationToggle(0)
+    }
+
+    const variants = {
+        visible: {
+            x: [20, 0],
+            opacity: 1,
+            transition: {
+                when: "beforeChildren",
+                staggerChildren: 0.1,
+                type: "easyIn",
+                delay: 0.1,
+                duration: 0.5,
+            },
+        },
+        hidden: {
+            opacity: 0,
+            transition: {
+                when: "afterChildren",
+            },
+        },
+    };
+
+    const item = {
+        hidden: { opacity: 0, x: 20 },
+        visible: { opacity: 1, x: 0 },
+    };
 
     const activeView = () => {
         return (
-            <Box w="100%" fontWeight={"bold"} fontSize={text_responsive}>
-                <Box pl="84%" onClick={() => props.onChangeOpenTags(!props.activeTag)} cursor="pointer">
+            <MotionBox variants={item} w="100%" fontWeight={"bold"} fontSize={text_responsive}>
+                <Box pl="84%" onClick={() => onActToggleTag()} cursor="pointer">
                     <FaTimes size="18" />
                 </Box>
 
@@ -27,9 +64,7 @@ export default function SideGridComponent(props) {
                 </Heading>
                 <Divider my="12px" bgColor={props.txtColor} />
                 {dummyTags().map((data, i) =>
-                    <Box key={i} fontSize="md" fontWeight="normal" my={1}>
-                        #{data.title}
-                    </Box>
+                    <Badge key={i} my={1} colorScheme={randomColor()} rounded="md" opacity="0.7">#{data.title}</Badge>
                 )}
 
                 <Heading mt={10} as="h1" size="md" isTruncated>
@@ -37,17 +72,15 @@ export default function SideGridComponent(props) {
                 </Heading>
                 <Divider my="12px" bgColor={props.txtColor} />
                 {dummyVirals().map((data, i) =>
-                    <Box key={i} fontSize="md" fontWeight="normal" my={1}>
-                        @{data.title}
-                    </Box>
+                    <Badge key={i} my={1} colorScheme={randomColor()} rounded="md" opacity="0.7">#{data.title}</Badge>
                 )}
-            </Box>
+            </MotionBox>
         )
     }
 
     const hideView = () => {
         return (
-            <Center onClick={() => props.onChangeOpenTags(!props.activeTag)}>
+            <Center onClick={() => onActToggleTag()}>
                 <FaHashtag my="auto" size={18} />
             </Center>
         )
@@ -56,11 +89,10 @@ export default function SideGridComponent(props) {
     return (
         <MotionBox
             pos="absolute"
-            w="auto"
+            w={props.activeTag ? "20vh" : "auto"}
             top="38px"
             right="23px"
             zIndex={5}
-            w="auto"
             p={[4, 4, 4, 6]}
             alignItems="flex-start"
             bgColor={props.bgColor}
@@ -68,13 +100,11 @@ export default function SideGridComponent(props) {
             rounded={`xl`}
             justifyContent="space-between"
             shadow={"md"}
-            initial={animations.destopOffBottom}
-            animate={animations.desktopOn}
-            transition={{
-                type: "spring",
-                bounce: 0.5,
-                delay: 0.2,
-                duration: 1.5,
+            initial={animationToggle < 1 ? "hidden" : false}
+            animate={"visible"}
+            variants={variants}
+            onAnimationComplete={() => {
+                setAnimationToggle(animationToggle + 1);
             }}
         >
             {props.activeTag ? activeView() : hideView()}
