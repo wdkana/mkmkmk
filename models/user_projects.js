@@ -6,7 +6,7 @@ const user_projects = new Schema({
         type: String,
         required: true,
         unique: false,
-        maxLength: [255, "public key terlalu pajang"],
+        maxLength: [255, "public key terlalu panjang"],
     },
     title: {
         type: String,
