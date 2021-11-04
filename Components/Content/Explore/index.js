@@ -1,10 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Container, Grid, GridItem, Flex, Box, Badge } from "@chakra-ui/react";
+import {
+  Container,
+  Grid,
+  GridItem,
+  Flex,
+  Box,
+} from "@chakra-ui/react";
 import { useColorMode, useColorModeValue } from "@chakra-ui/react";
 import {
   motion,
 } from "framer-motion";
-import { animations } from "../../lib/animations";
+import { animations } from "../../../lib/animations";
+import SideGrid from "./SideGrid";
+import SearchGrid from "./SearchGrid";
+import TopTagsGrid from "./TopTagsGrid";
+import NewTagsGrid from "./NewTagsGrid";
+import NewToThisGrid from "./NewToThisGrid";
 
 export default function ExploreComponent(props) {
   const { toggleColorMode } = useColorMode();
@@ -14,13 +25,15 @@ export default function ExploreComponent(props) {
   console.log("props", props);
 
   const [firstLoad, setFristLoad] = useState(0);
+  const [activeTag, setActiveTag] = useState(false)
 
   const MotionFlex = motion(Flex);
 
-  const Grid1 = () => {
+  const DummGrid = () => {
     return (
       <MotionFlex
         w="full"
+        h="20vh"
         p={[4, 4, 4, 6]}
         alignItems="flex-start"
         bgColor={bgColor}
@@ -41,47 +54,46 @@ export default function ExploreComponent(props) {
           setFristLoad(firstLoad + 1);
         }}
       >
-        <Box fontWeight={"bold"} fontSize={["lg", "xl", "xl", "3xl"]}>
-          Meja Kerja
-          <Badge
-            mb={5}
-            ml={2}
-            fontSize="0.4em"
-            variant="solid"
-            colorScheme="purple"
-          >
-            {" "}
-            DEA
-          </Badge>
+        <Box w="100%" fontWeight={"bold"} fontSize={["lg", "xl", "xl", "3xl"]}>
+          dummy
         </Box>
       </MotionFlex>
     );
   };
-  
+
+  const onChangeOpenTags = (data) => {
+    setActiveTag(data)
+  }
+
+
   return (
     <Container maxW="100%" mt={5}>
       <Grid
-        minH="95vh"
         w="100%"
         p={0}
         m={0}
-        // templateRows="repeat(4, 1fr)"
+        mb={4}
         templateColumns="repeat(8, 1fr)"
-        // border="1px solid #fff"
+        templateRows="repeat(4, auto)"
         gap={[2, 2, 4, 6, 6]}
         overflow="hidden"
-        gridAutoRows={["auto 100px auto", "auto 120px auto"]}
       >
-        <GridItem
-          colStart={1} 
-          colEnd={9}
-          // rowStart={[2, 1]}
-          // colEnd={{ base: 9, lg: 5, md: 5 }}
-        >
-            {Grid1()}
+        <GridItem colStart={[1]} colEnd={9}>
+          <SearchGrid bgColor={bgColor} txtColor={txtColor} bgColorContent={bgColorContent} />
         </GridItem>
-
+        <GridItem colStart={[1]} colEnd={9} pos="relative" h="340px">
+          <TopTagsGrid bgColor={bgColor} txtColor={txtColor} bgColorContent={bgColorContent} />
+        </GridItem>
+        <GridItem colStart={[1]} colEnd={9}>
+          <NewToThisGrid bgColor={bgColor} txtColor={txtColor} bgColorContent={bgColorContent}/>
+        </GridItem>
+        <GridItem colStart={[1]} colEnd={9} pos="relative" h="340px">
+          <NewTagsGrid bgColor={bgColor} txtColor={txtColor} bgColorContent={bgColorContent} />
+        </GridItem>
       </Grid>
+      <Box>
+        <SideGrid bgColor={bgColor} txtColor={txtColor} activeTag={activeTag} onChangeOpenTags={onChangeOpenTags} />
+      </Box>
     </Container>
   );
 }
