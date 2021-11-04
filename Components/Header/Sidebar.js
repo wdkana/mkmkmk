@@ -23,53 +23,11 @@ import {
 import NavItem from "./NavItem";
 import SwitchItem from "./SwitchItem";
 import { motion } from "framer-motion";
+import {dataNav,dataSubNav} from '../../lib/dataNavbar'
 
 export default function Sidebar(props) {
   const MotionFlex = motion(Flex);
   const [animationToggle, setAnimationToggle] = useState(0)
-
-  const dataNav = [
-    {
-      id: 1,
-      value: "dashboard",
-      title: "Dashboard",
-      url: "/",
-      icon: FaHome,
-    },
-    {
-      id: 2,
-      value: "explore",
-      title: "Explore",
-      url: "explore",
-      icon: FaWpexplorer,
-    },
-    {
-      id: 3,
-      value: "pinned",
-      title: "Pinned",
-      url: "pinned",
-      icon: FaThumbtack,
-    },
-  ];
-
-  const dataSubNav = [
-    {
-      id: 3,
-      value: "project",
-      title: "Project",
-      url: "project",
-      icon: FaProjectDiagram,
-    },
-    { id: 2, value: "link", title: "Link", url: "link", icon: FaLink },
-    { id: 3, value: "wallet", title: "Wallet", url: "wallet", icon: FaWallet },
-    {
-      id: 4,
-      value: "pengaturan",
-      title: "Pengaturan",
-      url: "pengaturan",
-      icon: FaTools,
-    },
-  ];
 
   const variants = {
     visible: {
@@ -120,6 +78,7 @@ export default function Sidebar(props) {
         setAnimationToggle(animationToggle + 1);
       }}
       zIndex={2}
+      display={["none", "flex"]}
     >
       <MotionFlex
         p="2%"
