@@ -6,7 +6,7 @@ export const dummyTags = () => {
         let dum = {
             id: i + 1,
             value: `tagdummy ${i + 1}`,
-            title: `TagDummy ${i + 1}`
+            title: `Tag ${i + 1}`
         }
         data.push(dum)
     }
@@ -20,7 +20,7 @@ export const dummyVirals = () => {
         let dum = {
             id: i + 1,
             value: `viraldummy ${i + 1}`,
-            title: `ViralDummy ${i + 1}`
+            title: `Viral ${i + 1}`
         }
         data.push(dum)
     }

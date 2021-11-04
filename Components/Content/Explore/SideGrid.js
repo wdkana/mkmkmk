@@ -36,7 +36,7 @@ export default function SideGridComponent(props) {
                 staggerChildren: 0.1,
                 type: "easyIn",
                 delay: 0.1,
-                duration: 0.5,
+                duration: 0.3,
             },
         },
         hidden: {
@@ -64,7 +64,7 @@ export default function SideGridComponent(props) {
                 </Heading>
                 <Divider my="12px" bgColor={props.txtColor} />
                 {dummyTags().map((data, i) =>
-                    <Badge key={i} my={1} colorScheme={randomColor()} rounded="md" opacity="0.7">#{data.title}</Badge>
+                    <Badge key={i} my={1} mr={1} colorScheme={randomColor()} rounded="md" opacity="0.7">#{data.title}</Badge>
                 )}
 
                 <Heading mt={10} as="h1" size="md" isTruncated>
@@ -72,7 +72,7 @@ export default function SideGridComponent(props) {
                 </Heading>
                 <Divider my="12px" bgColor={props.txtColor} />
                 {dummyVirals().map((data, i) =>
-                    <Badge key={i} my={1} colorScheme={randomColor()} rounded="md" opacity="0.7">#{data.title}</Badge>
+                    <Badge key={i} my={1} mr={1} colorScheme={randomColor()} rounded="md" opacity="0.7">#{data.title}</Badge>
                 )}
             </MotionBox>
         )
