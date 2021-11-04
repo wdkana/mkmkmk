@@ -39,7 +39,6 @@ export default function Layout(props) {
         pos={"relative"}
         w="100%"
         h="full"
-        overflow="auto scroll"
         zIndex={1}
         bgColor={!bgColor}
         opacity={1}
