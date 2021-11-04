@@ -1,16 +1,42 @@
-import {
-  Container,
-  Grid,
-  GridItem,
-} from "@chakra-ui/react";
+import React, { useState, useEffect } from "react";
+import { Container, Grid, GridItem } from "@chakra-ui/react";
 import MejaKerja from "./MejaKerja";
 import { connect } from "react-redux";
 import ProfileDashboard from "./ProfileDasboard";
 import Skill from "./Skill";
 import Inspirasi from "./Inspirasi";
 import ToolsDashboard from "./ToolsDashboard";
+import { thunk_private_key } from "../../middleware/user/private-key/privateKeyMiddleware";
+import { thunk_public_key } from "../../middleware/user/public-key/publicKeyMiddleware";
+import Cookies from 'universal-cookie';
 
-function DashboardComponent({FirstLoad ,dispatch, ...props}) {
+const DashboardComponent = (props) => {
+  console.log(props)
+  useEffect(() => {
+    const cookies = new Cookies()
+    if(cookies.get('private_key') != undefined && props.private.message === null && props.private.isLoading === false){
+      const dataPrivate = {
+        private_key: cookies.get('private_key')
+      }
+      props.onPrivate(dataPrivate, window.location.origin)
+    }
+    if(cookies.get('public_key') != undefined && props.private.message === null && props.private.isLoading === false){
+      const dataPublic = {
+        public_key: cookies.get('public_key')
+      }
+      props.onPublic(dataPublic, window.location.origin)
+    }
+    if(props.private.message === "private key tidak valid"){
+      cookies.remove('private_key')
+      cookies.remove('public_key')
+      window.location.href = "/login"
+    }
+    if(props.public.message === "public key tidak valid"){
+      cookies.remove('public_key')
+      cookies.remove('private_key')
+      window.location.href = "/login"
+    }
+  }, [props.private, props.public]);
 
   return (
     <Container maxW="100%" mt={5} pr={2}>
@@ -49,4 +75,18 @@ function DashboardComponent({FirstLoad ,dispatch, ...props}) {
   );
 }
 
-export default connect(state => state)(DashboardComponent)
+const mapStateToProps = state => {
+  return {
+    private: state.PrivateKey,
+    public: state.PublicKey
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onPrivate: (data, url) => { dispatch(thunk_private_key(data, url)) },
+    onPublic: (data, url) => { dispatch(thunk_public_key(data, url)) },
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DashboardComponent)
