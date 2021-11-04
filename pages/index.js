@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import LandingPage from "../Components/LandingPage";
 import { Provider } from "react-redux";
 import stores from "../redux/store";
