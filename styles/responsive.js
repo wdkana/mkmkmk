@@ -6,6 +6,6 @@ export const text_responsive = () => {
 }
 
 export const icon_responsive = () => {
-    const data = { md: 18, lg: 16, xl: 19 }
+    const data = { base: 18, md: 18, lg: 16, xl: 19 }
     return data
 }
