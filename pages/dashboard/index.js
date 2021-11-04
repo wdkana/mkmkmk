@@ -7,7 +7,7 @@ function PageDashboard() {
 
   useEffect(() => {
     const cookies = new Cookies()
-    if(cookies.get('private_key') == undefined){
+    if(cookies.get('private_key') == undefined || cookies.get('public_key') == undefined ){
       window.location.href = '/login'
     }
   }, []);

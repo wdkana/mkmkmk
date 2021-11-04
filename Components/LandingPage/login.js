@@ -36,6 +36,7 @@ const Login = (props) => {
       if(props.loginReducer.user.private_key === privateKey){
         const cookies = new Cookies()
         cookies.set('private_key', props.loginReducer.user.private_key, { path: '/' })
+        cookies.set('public_key', props.loginReducer.user.public_key, { path: '/' })
         window.location.href = "/dashboard"
       } 
     }
