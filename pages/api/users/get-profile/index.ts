@@ -17,7 +17,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                 res.status(200).json({
                     "status": "OK",
                     "payload": profile,jobs,skills,
-                    "message": "Get jobs successfully"
+                    "message": "Get profile successfully"
                 });
             }
         } catch (error: any) {
