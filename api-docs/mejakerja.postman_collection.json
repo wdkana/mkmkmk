@@ -1,0 +1,349 @@
+{
+	"info": {
+		"_postman_id": "6b700133-3269-43d7-9f00-813ceffe0e4e",
+		"name": "mejakerja",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "user project api",
+			"item": [
+				{
+					"name": "create user project status open",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"public_key\": \"U2FsdGVkX1+uWGr/85+h8CMXC7dQppWMI2ZPtWAQQuM=\",\r\n    \"title\": \"test title\",\r\n    \"description\": \"test description\",\r\n    \"link\": \"test link\",\r\n    \"folder_id\": \"test\",\r\n    \"status\": \"OPEN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users/project",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"project"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create user project status private",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"public_key\": \"U2FsdGVkX1+uWGr/85+h8CMXC7dQppWMI2ZPtWAQQuM=\",\r\n    \"title\": \"test title\",\r\n    \"description\": \"test description\",\r\n    \"link\": \"test link\",\r\n    \"folder_id\": \"test\",\r\n    \"status\": \"PRIVATE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users/project",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"project"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get data user project by public key",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "action",
+								"value": "get_data_by_public_key",
+								"type": "text"
+							},
+							{
+								"key": "public_key",
+								"value": "U2FsdGVkX1+uWGr/85+h8CMXC7dQppWMI2ZPtWAQQuM=",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users/project",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"project"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete data user project",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"public_key\": \"U2FsdGVkX1+uWGr/85+h8CMXC7dQppWMI2ZPtWAQQuM=\",\r\n    \"_id\": \"61835635c9b642932534ab3c\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users/project",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"project"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user project",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"public_key\": \"U2FsdGVkX1+uWGr/85+h8CMXC7dQppWMI2ZPtWAQQuM=\",\r\n    \"title\": \"test\",\r\n    \"description\": \"update description\",\r\n    \"link\": \"update link test\",\r\n    \"folder_id\": \"update folder id\",\r\n    \"status\": \"PRIVATE\",\r\n    \"_id\": \"61834f2fc9b642932534aad6\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/user-projects",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"user-projects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get one data user project by _id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "action",
+								"value": "get_detail",
+								"type": "text"
+							},
+							{
+								"key": "_id",
+								"value": "61835635c9b642932534ab3c",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/users/project",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"project"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user follow api",
+			"item": [
+				{
+					"name": "follow",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"public_key\": \"U2FsdGVkX1/8B4RkzSnKm6jowFZEwIW1sXo18nizC6k=\",\r\n    \"public_key_target\": \"U2FsdGVkX1+uWGr/85+h8CMXC7dQppWMI2ZPtWAQQuM=\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users/follow",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"follow"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "unfollow",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"61838e64b093f75262bb57a5\",\r\n    \"public_key\": \"U2FsdGVkX1+uWGr/85+h8CMXC7dQppWMI2ZPtWAQQuM=\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users/follow",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"follow"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get data user following",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "action",
+								"value": "following",
+								"type": "text"
+							},
+							{
+								"key": "public_key",
+								"value": "U2FsdGVkX1+uWGr/85+h8CMXC7dQppWMI2ZPtWAQQuM=",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"public_key\": \"U2FsdGVkX1+uWGr/85+h8CMXC7dQppWMI2ZPtWAQQuM=\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users/follow",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"follow"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get data user followers",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "action",
+								"value": "followers",
+								"type": "text"
+							},
+							{
+								"key": "public_key",
+								"value": "U2FsdGVkX1+uWGr/85+h8CMXC7dQppWMI2ZPtWAQQuM=",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users/follow",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"follow"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

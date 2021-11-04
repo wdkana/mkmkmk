@@ -88,7 +88,7 @@ export default function SideGridComponent(props) {
 
     return (
         <MotionBox
-            pos="absolute"
+            pos="fixed"
             w={props.activeTag ? "20vh" : "auto"}
             top="38px"
             right="23px"
