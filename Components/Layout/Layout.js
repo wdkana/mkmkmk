@@ -3,6 +3,7 @@ import { Flex, Box } from "@chakra-ui/react";
 import { useColorMode, useColorModeValue } from "@chakra-ui/color-mode";
 import Sidebar from "../Header/Sidebar";
 import { useRouter } from "next/router";
+import BottomBar from "../Header/BottomBar";
 
 export default function Layout(props) {
   const router = useRouter();
@@ -24,7 +25,7 @@ export default function Layout(props) {
   };
 
   return (
-    <Flex pos="relative">
+    <Flex pos="relative" direction={["column","row"]}>
       <Sidebar
         bgColor={bgColor}
         toggleColorMode={toggleColorMode}
@@ -35,16 +36,23 @@ export default function Layout(props) {
         navSize={navSize}
       />
       <Box
-        pos={[navSize == "small" ? "relative" : "absolute", "relative"]}
+        pos={"relative"}
         w="100%"
-        maxH="100vh"
+        h="full"
         overflow="auto scroll"
         zIndex={1}
         bgColor={!bgColor}
-        opacity={[navSize == "small" ? 1 : .3, 1]}
+        opacity={1}
       >
         {props.children}
       </Box>
+      <BottomBar
+        bgColor={bgColor}
+        toggleColorMode={toggleColorMode}
+        txtColor={txtColor}
+        colorMode={useColorMode().colorMode}
+        url={uri}
+      />
     </Flex>
   );
 }
