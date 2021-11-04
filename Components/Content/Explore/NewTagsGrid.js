@@ -4,7 +4,7 @@ import {
     Box,
     SimpleGrid,
     Badge,
-    Image,
+    Avatar,
     Text,
     Heading
 } from "@chakra-ui/react";
@@ -12,12 +12,10 @@ import {
     AnimatePresence,
     motion,
 } from "framer-motion";
-import { animations } from "../../../lib/animations";
 import { dummyTopTags } from "../../../shared/json/side-grid.explore";
 import { FaEye, FaThumbtack } from "react-icons/fa"
 
 export default function NewTagsGridComponent(props) {
-    //   const { toggleColorMode } = useColorMode();
     console.log("props", props);
 
     const [firstLoad, setFristLoad] = useState(0);
@@ -25,25 +23,49 @@ export default function NewTagsGridComponent(props) {
     const MotionFlex = motion(Flex);
     const MotioSimpleGrid = motion(SimpleGrid)
 
+    const variants = {
+        visible: {
+            y: 0,
+            opacity: 1,
+            transition: {
+                when: "beforeChildren",
+                staggerChildren: 0.1,
+                type: "spring",
+                bounce: 0.5,
+                delay: 0.3,
+                duration: 0.5,
+            },
+        },
+        hidden: {
+            y: "20%",
+            opacity: 0,
+            transition: {
+                when: "afterChildren",
+            },
+        },
+    };
+
+    const item = {
+        hidden: { x: "5%", opacity: 0, },
+        visible: { x: 0, opacity: 1, },
+    };
+
     return (
         <MotionFlex
-            // bgColor={props.bgColor}
             textColor={props.txtColor}
             justifyContent="space-between"
             alignItems="start"
             h={["300px"]}
-            initial={firstLoad < 1 ? animations.destopOffBottom : false}
-            animate={animations.desktopOn}
-            transition={{
-                type: "spring",
-                bounce: 0.5,
-                delay: 0.3,
-                duration: 1.5,
-            }}
+            initial={firstLoad < 1 ? "hidden" : false}
+            animate={"visible"}
+            variants={variants}
             position="relative"
             ref={skillRef}
+            onAnimationComplete={() => {
+                setFristLoad(firstLoad + 1);
+            }}
         >
-            <Box pl="2" pt="2">New Tags - inspiration</Box>
+            <Box pl="2" pt="2">Top Tags - inspiration</Box>
             <AnimatePresence>
                 <MotioSimpleGrid
                     h="300px"
@@ -51,29 +73,22 @@ export default function NewTagsGridComponent(props) {
                     spacingX="2"
                     gridAutoFlow="column"
                     position="absolute"
-                    top="8"
+                    top="10"
                     drag="x"
                     dragConstraints={skillRef}
                 >
                     {dummyTopTags().map((data, i) => {
                         return (
                             <MotionFlex
-                                w="40"
+                                key={i}
+                                w={["40", "230px"]}
                                 rounded="xl"
                                 shadow="xl"
                                 justifyContent="center"
                                 alignItems="end"
                                 pos="relative"
                                 overflow="hidden"
-                                initial={firstLoad < 1 ? animations.mobileOffLeft : false}
-                                animate={animations.mobileOnLeft}
-                                transition={{
-                                    type: "spring",
-                                    bounce: 0.5,
-                                    delay: .8 + (i / data.length),
-                                    duration: 1.5,
-                                }}
-                                exit={animations.mobileOffLeft}
+                                variants={item}
                             >
                                 <Box
                                     w="full"
@@ -109,20 +124,18 @@ export default function NewTagsGridComponent(props) {
                                         <FaThumbtack size={14} />
                                     </Badge>
                                 </Box>
-                                <Flex pos="absolute" bottom="0px" bgColor={props.bgColor} w="full">
-                                    <Box p={2}>
-                                        <Image
-                                            borderRadius="full"
-                                            boxSize="40px"
-                                            src={data.avatar}
-                                            alt={data.user}
-                                            mx="auto"
-                                        />
-                                        <Text fontSize="12px">{data.user}</Text>
+                                <Flex pos="absolute" bottom="0px" bgColor={props.bgColor} w="full" textAlign="center">
+                                    <Box p={2} w="65%" mt="auto">
+                                        <Avatar size="md" src={data.avatar} alt={data.user} />
+                                        <Text fontSize="12px" p="1">{data.user}</Text>
                                     </Box>
-                                    <Box p={2}>
+                                    <Box p={2} display={["none", "block"]}>
+                                        <Heading py="1" as="h1" fontSize="16px">{data.title}</Heading>
+                                        <Text pt="2" fontSize="12px" textAlign="left" wordBreak="break-all">{data.des.length > 50 ? `${data.des.substr(0, 50)} ...` : data.des}</Text>
+                                    </Box>
+                                    <Box p={2} display={["block", "none"]}>
                                         <Heading as="h1" fontSize="12px">{data.title}</Heading>
-                                        <Text pt="2" fontSize="12px">{data.des.length > 25 ? `${data.des.substr(0, 25)} ...` : data.des}</Text>
+                                        <Text pt="2" fontSize="11px" textAlign="left" wordBreak="break-all">{data.des.length > 25 ? `${data.des.substr(0, 25)} ...` : data.des}</Text>
                                     </Box>
                                 </Flex>
                             </MotionFlex>

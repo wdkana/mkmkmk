@@ -26,13 +26,11 @@ export default function SearchGridComponent(props) {
         <MotionFlex
             w="full"
             h="100%"
-            p={[4, 4, 4, 6]}
+            py={[4, 4, 4, 6]}
             alignItems="flex-start"
-            // bgColor={props.bgColor}
             textColor={props.txtColor}
             rounded={`xl`}
             justifyContent="space-between"
-            // toggleColorMode={toggleColorMode}
             shadow={"md"}
             initial={firstLoad < 1 ? animations.destopOffBottom : false}
             animate={animations.desktopOn}
@@ -46,7 +44,7 @@ export default function SearchGridComponent(props) {
                 setFristLoad(firstLoad + 1);
             }}
         >
-            <Box borderRadius="18px" bgColor={props.bgColor} m="auto" w="70%" fontWeight={"bold"} fontSize={["lg", "xl", "xl", "3xl"]}>
+            <Box borderRadius="18px" bgColor={props.bgColor} m={["1", "auto"]} w="80%">
             <InputGroup>
             <Input
               focusBorderColor={props.bgColorContent}
